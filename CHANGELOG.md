@@ -1,7 +1,10 @@
 # Roadmap
 
-- [x] A feature that has been completed
-- [ ] A feature that has NOT yet been completed
+- [x] Add project to startup projects from Solution Explorer 
+- [ ] Remove selected project from startup
+- [ ] Remove all startup project and set it as the selected project
+- [ ] Show all startup project on a popup
+- [ ] Show number of project that starts up on task bar 
 
 Features that have a checkmark are complete and available for
 download in the
@@ -11,13 +14,6 @@ download in the
 
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
-
-## 1.1
-
-**2016-04-16**
-
-- [x] Feature 3
-- [x] Feature 4
 
 ## 1.0
 
