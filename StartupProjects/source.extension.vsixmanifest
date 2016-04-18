@@ -4,7 +4,9 @@
     <Identity Id="00302942-1ef6-4dcd-b25c-a82e02a661f9" Version="1.0" Language="en-US" Publisher="Themba Masina" />
     <DisplayName>Startup Projects</DisplayName>
     <Description xml:space="preserve">The easiest way to add/remove project to a startup projects directly from Solution Explorer.</Description>
+    <MoreInfo>https://github.com/thembamasina/StartupProjects</MoreInfo>
     <License>Resources\LICENSE</License>
+    <ReleaseNotes>https://github.com/thembamasina/StartupProjects/blob/master/CHANGELOG.md</ReleaseNotes>
     <Icon>Resources\icon.png</Icon>
     <PreviewImage>Resources\Preview.png</PreviewImage>
     <Tags>startup, projects</Tags>

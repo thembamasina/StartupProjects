@@ -2,8 +2,7 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/w07av9e4faa018km?svg=true)](https://ci.appveyor.com/project/thembamasina/startupprojects)
 
-<!-- Update the VS Gallery link after you upload the VSIX-->
-Download this extension from the [VS Gallery](https://visualstudiogallery.msdn.microsoft.com/[GuidFromGallery])
+Download this extension from the [VS Gallery](https://visualstudiogallery.msdn.microsoft.com/f9c9ddaf-9665-4886-8d13-1a30a9d3286d)
 or get the [CI build](http://vsixgallery.com/extension/00302942-1ef6-4dcd-b25c-a82e02a661f9/).
 
 ---------------------------------------

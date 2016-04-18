@@ -7,14 +7,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
-using System.Globalization;
 using System.Linq;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
 
-namespace StartupProjects
+namespace StartupProjectss
 {
     /// <summary>
     /// Command handler
