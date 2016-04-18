@@ -17,7 +17,7 @@ namespace StartupProjectss
     /// <summary>
     /// Command handler
     /// </summary>
-    internal sealed class AddToStartupProjectCommand
+    public class AddToStartupProjectCommand
     {
         /// <summary>
         /// Command ID.
