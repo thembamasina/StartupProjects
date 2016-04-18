@@ -56,7 +56,7 @@
         <Parent guid="guidAddToStartupProjectCommandPackageCmdSet" id="MyMenuGroup" />
         <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
-          <ButtonText>Add As StartUp project...</ButtonText>
+          <ButtonText>Add To StartUp projects...</ButtonText>
         </Strings>
       </Button>
     </Buttons>
