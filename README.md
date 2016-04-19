@@ -16,7 +16,7 @@ See the [changelog](CHANGELOG.md) for changes and roadmap.
 - Add project to startup projects from Solution Explorer 
 
 ### Add to startup projects
-- Select a project and right click and select 'Add As StartUp project...'
+- Select a project and right click and select 'Add To StartUp project...'
 
 ![Context Menu](art/context-menu.bmp)
 

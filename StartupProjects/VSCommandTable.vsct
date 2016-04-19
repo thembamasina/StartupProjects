@@ -72,17 +72,6 @@
       <Bitmap guid="guidImages" href="Resources\AddToStartupProjectCommand.png" usedList="bmpPic1"/>
     </Bitmaps>
   </Commands>
-  
-  <VisibilityConstraints>
-<!--
-    <VisibilityItem guid="guidDynamicVisibilityCmdSet"
-                    id="cmdidMyCommand" context="UICONTEXT_EmptySolution" />
-    <VisibilityItem guid="guidDynamicVisibilityCmdSet"
-                        id="cmdidMyCommand" context="UICONTEXT_SolutionHasSingleProject" />
--->
-    <VisibilityItem guid="guidAddToStartupProjectCommandPackageCmdSet"
-                    id="AddToStartupProjectCommandId" context="UICONTEXT_SolutionHasMultipleProjects" />
-  </VisibilityConstraints>
   <Symbols>
     <!-- This is the package guid. -->
     <GuidSymbol name="guidAddToStartupProjectCommandPackage" value="{a6f62261-b200-41f4-8827-3ce7ff087848}" />
