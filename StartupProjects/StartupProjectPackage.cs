@@ -6,6 +6,9 @@
 
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
+using StartupProjects.Commands;
+using StartupProjects.Shared;
 using StartupProjectss;
 
 namespace StartupProjects
@@ -33,7 +36,7 @@ namespace StartupProjects
     // Info on this package for Help/About
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid(PackageGuids.guidAddToStartupProjectCommandPackageString)]
-    public sealed class VSPackage : Package
+    public sealed class StartupProjectPackage : Package
     {
         #region Package Members
 
@@ -43,7 +46,9 @@ namespace StartupProjects
         /// </summary>
         protected override void Initialize()
         {
+            ProjectHelpers.Initialize(this);
             AddToStartupProjectCommand.Initialize(this);
+            RemoveFromStartUpProjectsCommand.Initialize(this);
             base.Initialize();
         }
 

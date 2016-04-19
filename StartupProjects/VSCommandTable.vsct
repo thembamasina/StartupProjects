@@ -60,6 +60,14 @@
           <ButtonText>Add To StartUp projects...</ButtonText>
         </Strings>
       </Button>
+
+      <Button guid="guidAddToStartupProjectCommandPackageCmdSet" id="cmdidRemoveFromStartUpProjects" priority="0x0400" type="Button">
+        <Parent guid="guidAddToStartupProjectCommandPackageCmdSet" id="MyMenuGroup" />
+        <Strings>
+          <ButtonText>Remove From StartUp Projects...</ButtonText>
+        </Strings>
+      </Button>
+      
     </Buttons>
 
     <!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
@@ -80,6 +88,7 @@
     <GuidSymbol name="guidAddToStartupProjectCommandPackageCmdSet" value="{6aab571c-daed-43f3-9581-0e86325885b7}">
       <IDSymbol name="MyMenuGroup" value="0x1020" />
       <IDSymbol name="AddToStartupProjectCommandId" value="0x0100" />
+      <IDSymbol value="0x0200" name="cmdidRemoveFromStartUpProjects" />
     </GuidSymbol>
 
     <GuidSymbol name="guidImages" value="{125ef172-90ee-4b13-9246-9b8af2316482}" >

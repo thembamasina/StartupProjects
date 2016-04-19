@@ -26,6 +26,7 @@ namespace StartupProjects
     {
         public const int MyMenuGroup = 0x1020;
         public const int AddToStartupProjectCommandId = 0x0100;
+        public const int cmdidRemoveFromStartUpProjects = 0x0200;
         public const int bmpPic1 = 0x0001;
     }
 }

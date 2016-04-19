@@ -53,7 +53,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Commands\AddToStartupProjectCommand.cs" />
-    <Compile Include="VSPackage.cs" />
+    <Compile Include="Commands\RemoveFromStartUpProjectsCommand.cs" />
+    <Compile Include="StartupProjectPackage.cs" />
     <Compile Include="VSCommandTable.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -69,11 +70,13 @@
       <Link>Resources\LICENSE</Link>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="Commands\Resources\RemoveFromStartUpProjects.png" />
     <Content Include="source.extension.ico">
       <DependentUpon>source.extension.vsixmanifest</DependentUpon>
     </Content>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <Compile Include="Shared\ProjectHelper.cs" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
       <Generator>VsixManifestGenerator</Generator>
