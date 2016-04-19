@@ -14,11 +14,17 @@ See the [changelog](CHANGELOG.md) for changes and roadmap.
 ## Features
 
 - Add project to startup projects from Solution Explorer 
+- Remove project from startup project from Solution Explorer
 
 ### Add to startup projects
-- Select a project and right click and select 'Add To StartUp project...'
+- Select a project and right click, then select 'Add To StartUp Project...'
 
 ![Context Menu](art/context-menu.bmp)
+
+### Remove from startup projects
+- Select a project and right click, then select 'Remove from StartUp Projects...'
+
+![Remove](art/remove.bmp)
 
 ## Contribute
 Check out the [contribution guidelines](CONTRIBUTING.md)

@@ -35,7 +35,7 @@ namespace StartupProjects
     [InstalledProductRegistration("#110", "#112", Vsix.Version, IconResourceID = 400)]
     // Info on this package for Help/About
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [Guid(PackageGuids.guidAddToStartupProjectCommandPackageString)]
+    [Guid("a6f62261-b200-41f4-8827-3ce7ff087848")]
     public sealed class StartupProjectPackage : Package
     {
         #region Package Members

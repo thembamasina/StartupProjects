@@ -2,7 +2,7 @@
 
 - [x] Add project to startup projects from Solution Explorer
     - [x] Show menu when there is more that 1 project in a solution 
-- [ ] Remove selected project from startup
+- [x] Remove selected project from startup
 - [ ] Remove all startup project and set it as the selected project
 - [ ] Show all startup project on a popup
 - [ ] Show number of project that starts up on task bar
@@ -16,6 +16,10 @@ download in the
 
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
+## 1.1
+**2016-04-19**
+
+- [x] Remove selected project from startup projects
 
 ## 1.0
 

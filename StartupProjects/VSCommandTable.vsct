@@ -54,10 +54,10 @@
           If you do not want an image next to your command, remove the Icon node /> -->
       <Button guid="guidAddToStartupProjectCommandPackageCmdSet" id="AddToStartupProjectCommandId" priority="0x0300" type="Button">
         <Parent guid="guidAddToStartupProjectCommandPackageCmdSet" id="MyMenuGroup" />
-        <Icon guid="guidImages" id="bmpPic1" />
+        <Icon guid="guidImages" id="bmpAdd" />
         <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
-          <ButtonText>Add To StartUp projects...</ButtonText>
+          <ButtonText>Add To StartUp Projects...</ButtonText>
         </Strings>
       </Button>
 
@@ -77,7 +77,7 @@
             bitmap strip containing the bitmaps and then there are the numeric ids of the elements used
             inside a button definition. An important aspect of this declaration is that the element id
             must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
-      <Bitmap guid="guidImages" href="Resources\AddToStartupProjectCommand.png" usedList="bmpPic1"/>
+      <Bitmap guid="guidImages" href="Resources\AddToStartupProjectCommand.png" usedList="bmpAdd"/>
     </Bitmaps>
   </Commands>
   <Symbols>
@@ -92,7 +92,7 @@
     </GuidSymbol>
 
     <GuidSymbol name="guidImages" value="{125ef172-90ee-4b13-9246-9b8af2316482}" >
-      <IDSymbol name="bmpPic1" value="1" />
+      <IDSymbol name="bmpAdd" value="1" />
     </GuidSymbol>
   </Symbols>
 </CommandTable>

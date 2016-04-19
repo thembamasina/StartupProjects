@@ -11,7 +11,7 @@ namespace StartupProjects
         public const string Name = "Startup Projects";
         public const string Description = "The easiest way to add/remove project to a startup projects directly from Solution Explorer.";
         public const string Language = "en-US";
-        public const string Version = "1.0";
+        public const string Version = "1.1";
         public const string Author = "Themba Masina";
         public const string Tags = "startup, projects";
     }
