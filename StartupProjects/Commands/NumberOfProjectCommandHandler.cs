@@ -9,6 +9,7 @@ using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using StartupProjects.Shared;
+using Window = System.Windows.Window;
 
 namespace StartupProjects.Commands
 {
@@ -45,8 +46,8 @@ namespace StartupProjects.Commands
 
             VsShellUtilities.ShowMessageBox(
                            _serviceProvider,
+                           "",
                            message,
-                           "StartUp Projects",
                            OLEMSGICON.OLEMSGICON_INFO,
                            OLEMSGBUTTON.OLEMSGBUTTON_OK,
                            OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);

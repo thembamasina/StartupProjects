@@ -15,6 +15,8 @@ See the [changelog](CHANGELOG.md) for changes and roadmap.
 
 - Add project to startup projects from Solution Explorer 
 - Remove project from startup project from Solution Explorer
+- Show number of startup projects in the statusbar.
+- Show a popup with all the startup project
 
 ### Add to startup projects
 - Select a project and right click, then select 'Add To StartUp Project...'
@@ -25,6 +27,15 @@ See the [changelog](CHANGELOG.md) for changes and roadmap.
 - Select a project and right click, then select 'Remove from StartUp Projects...'
 
 ![Remove](art/remove.bmp)
+
+### Number of startup projects
+- Open a solution.
+
+![Show Number Of Projects](art/show-number-of-projects.bmp)
+
+Left click on the number of startup project in the statusbar
+
+![Popup](art/popup.bmp)
 
 ## Contribute
 Check out the [contribution guidelines](CONTRIBUTING.md)
