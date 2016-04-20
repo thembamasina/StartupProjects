@@ -5,42 +5,38 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.Design;
-using System.Linq;
 using EnvDTE;
-using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
-using StartupProjects;
 using StartupProjects.Shared;
 
 namespace StartupProjectss
 {
     /// <summary>
-    /// Command handler
+    ///     Command handler
     /// </summary>
-    sealed class AddToStartupProjectCommand
+    internal sealed class AddToStartupProjectCommand
     {
         /// <summary>
-        /// Command ID.
+        ///     Command ID.
         /// </summary>
         public const int CommandId = 0x0100;
 
         /// <summary>
-        /// Command menu group (command set GUID).
+        ///     Command menu group (command set GUID).
         /// </summary>
         public static readonly Guid CommandSet = new Guid("6aab571c-daed-43f3-9581-0e86325885b7");
 
 //        public static readonly Guid CommandSet = new Guid(PackageGuids.guidAddToStartupProjectCommandPackageCmdSetString);
 
         /// <summary>
-        /// VS Package that provides this command, not null.
+        ///     VS Package that provides this command, not null.
         /// </summary>
         private readonly Package package;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AddToStartupProjectCommand"/> class.
-        /// Adds our command handlers for menu (commands must exist in the command table file)
+        ///     Initializes a new instance of the <see cref="AddToStartupProjectCommand" /> class.
+        ///     Adds our command handlers for menu (commands must exist in the command table file)
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
         private AddToStartupProjectCommand(Package package)
@@ -52,31 +48,31 @@ namespace StartupProjectss
 
             this.package = package;
 
-            OleMenuCommandService commandService =
-                this.ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+            var commandService =
+                ServiceProvider.GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             if (commandService != null)
             {
                 var menuCommandID = new CommandID(CommandSet, CommandId);
-                var menuItem = new MenuCommand(this.MenuItemCallback, menuCommandID);
+                var menuItem = new MenuCommand(MenuItemCallback, menuCommandID);
                 commandService.AddCommand(menuItem);
             }
         }
 
         /// <summary>
-        /// Gets the instance of the command.
+        ///     Gets the instance of the command.
         /// </summary>
         public static AddToStartupProjectCommand Instance { get; private set; }
 
         /// <summary>
-        /// Gets the service provider from the owner package.
+        ///     Gets the service provider from the owner package.
         /// </summary>
         private IServiceProvider ServiceProvider
         {
-            get { return this.package; }
+            get { return package; }
         }
 
         /// <summary>
-        /// Initializes the singleton instance of the command.
+        ///     Initializes the singleton instance of the command.
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
         public static void Initialize(Package package)
@@ -85,9 +81,9 @@ namespace StartupProjectss
         }
 
         /// <summary>
-        /// This function is the callback used to execute the command when the menu item is clicked.
-        /// See the constructor to see how the menu item is associated with this function using
-        /// OleMenuCommandService service and MenuCommand class.
+        ///     This function is the callback used to execute the command when the menu item is clicked.
+        ///     See the constructor to see how the menu item is associated with this function using
+        ///     OleMenuCommandService service and MenuCommand class.
         /// </summary>
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event args.</param>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="00302942-1ef6-4dcd-b25c-a82e02a661f9" Version="1.1" Language="en-US" Publisher="Themba Masina" />
+    <Identity Id="00302942-1ef6-4dcd-b25c-a82e02a661f9" Version="1.3" Language="en-US" Publisher="Themba Masina" />
     <DisplayName>Startup Projects</DisplayName>
     <Description xml:space="preserve">The easiest way to add/remove project to a startup projects directly from Solution Explorer.</Description>
     <MoreInfo>https://github.com/thembamasina/StartupProjects</MoreInfo>

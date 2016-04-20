@@ -14,10 +14,12 @@ namespace StartupProjects.Shared
         {
             get
             {
-                var dte2 = (DTE2)_serviceProvider.GetService(typeof(DTE));
+                var dte2 = (DTE2) _serviceProvider.GetService(typeof(DTE));
                 return dte2.Solution;
             }
         }
+
+        public static int NumberOfStartupProjects => GetStartUpProjects().Count;
 
         public static string GetProjects()
         {
@@ -27,12 +29,12 @@ namespace StartupProjects.Shared
 
         private static string GetSelectedProject(DTE2 dte2)
         {
-            var items = (Array)dte2.ToolWindows.SolutionExplorer.SelectedItems;
+            var items = (Array) dte2.ToolWindows.SolutionExplorer.SelectedItems;
 
             var selectedProjects = from item in items.Cast<UIHierarchyItem>()
-                                   let project = item.Object as Project
-                                   select project;
-            Project first = selectedProjects.First();
+                let project = item.Object as Project
+                select project;
+            var first = selectedProjects.First();
             return first.UniqueName;
         }
 
@@ -41,9 +43,9 @@ namespace StartupProjects.Shared
             _serviceProvider = serviceProvider;
         }
 
-        private static List<object> GetStartUpProjects()
+        public static List<object> GetStartUpProjects()
         {
-            return (((object[]) Solution.SolutionBuild.StartupProjects) ?? new List<object>().ToArray()).ToList();
+            return ((object[]) Solution.SolutionBuild.StartupProjects ?? new List<object>().ToArray()).ToList();
         }
 
         public static void AddToStartupProjects(string selectedProject)
@@ -78,7 +80,7 @@ namespace StartupProjects.Shared
             var list = new List<string>();
             foreach (Property property in Solution.Properties)
             {
-               list.Add(property.Name); 
+                list.Add(property.Name);
             }
 
             if (startupProjects.Count == 1)
@@ -101,7 +103,15 @@ namespace StartupProjects.Shared
 
         private static string GetProjectByUniqueName(string startupProject)
         {
-            return (from Project project in Solution.Projects where project.UniqueName == startupProject select project.Name).FirstOrDefault();
+            return
+                (from Project project in Solution.Projects
+                    where project.UniqueName == startupProject
+                    select project.Name).FirstOrDefault();
+        }
+
+        public static IEnumerable<string> GetStartUpProjectName()
+        {
+            return GetStartUpProjects().Select(x => GetProjectByUniqueName(x.ToString()));
         }
     }
 }
