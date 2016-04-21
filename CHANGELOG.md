@@ -16,7 +16,11 @@ download in the
 
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
-## 1.1
+## 1.4
+**2016-04-19**
+- [x] Bug fixes
+
+## 1.3
 **2016-04-19**
 
 - [x] Show nuumber of startup projects in a statusbar.
