@@ -1,10 +1,4 @@
-﻿//------------------------------------------------------------------------------
-// <copyright file="AddToStartupProjectCommandPackage.cs" company="Company">
-//     Copyright (c) Company.  All rights reserved.
-// </copyright>
-//------------------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -29,11 +23,6 @@ namespace StartupProjects
     [ProvideAutoLoad(UIContextGuids.SolutionExists)]
     public sealed class StartupProjectPackage : Package
     {
-        #region Package Members
-        /// <summary>
-        ///     Initialization of the package; this method is called right after the package is sited, so this is the place
-        ///     where you can put all the initialization code that rely on services provided by VisualStudio.
-        /// </summary>
         protected override void Initialize()
         {
             ProjectHelpers.Initialize(this);
@@ -51,46 +40,5 @@ namespace StartupProjects
         {
             Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering constructor for: {0}", this.ToString()));
         }
-
-        #endregion
     }
-
-/*
-    internal class DteInitializer : IVsShellPropertyEvents
-    {
-        private IVsShell ShellService;
-        private uint Cookie;
-        private Action Callback;
-
-        internal DteInitializer(IVsShell shellService, Action callback)
-        {
-            this.ShellService = shellService;
-            this.Callback = callback;
-
-            // Set an event handler to detect when the IDE is fully initialized
-            int hr = this.ShellService.AdviseShellPropertyChanges(this, out this.Cookie);
-
-            ErrorHandler.ThrowOnFailure(hr);
-        }
-
-        int IVsShellPropertyEvents.OnShellPropertyChange(int propid, object var)
-        {
-            if (propid != -9053)
-            {
-                return 0;
-            }
-
-            // Release the event handler to detect when the IDE is fully initialized
-            int hr = this.ShellService.UnadviseShellPropertyChanges(this.Cookie);
-
-            ErrorHandler.ThrowOnFailure(hr);
-
-            this.Cookie = 0;
-
-            this.Callback();
-
-            return VSConstants.S_OK;
-        }
-    }
-*/
 }

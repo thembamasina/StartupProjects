@@ -1,16 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.25123.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartupProjects", "StartupProjects\StartupProjects.csproj", "{3D6D9EFC-977C-4863-8C7B-88900223018A}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D1104A5A-A3A2-4959-A698-B7D7251EE134}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
 		CHANGELOG.md = CHANGELOG.md
 		README.md = README.md
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartupProjects", "StartupProjects\StartupProjects.csproj", "{3D6D9EFC-977C-4863-8C7B-88900223018A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
