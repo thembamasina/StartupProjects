@@ -9,7 +9,6 @@ using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using StartupProjects.Shared;
-using Window = System.Windows.Window;
 
 namespace StartupProjects.Commands
 {
