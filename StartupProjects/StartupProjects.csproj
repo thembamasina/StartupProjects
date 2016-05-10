@@ -74,7 +74,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Commands\AddToStartupProjectCommand.cs" />
+    <Compile Include="Commands\MyPopup.cs" />
+    <Compile Include="Commands\NewStartupProjectGroup.xaml.cs">
+      <DependentUpon>NewStartupProjectGroup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Commands\RemoveFromStartUpProjectsCommand.cs" />
+    <Compile Include="Commands\StartupGroups.cs" />
+    <Compile Include="Commands\StartupGroupsCommand.cs" />
+    <Compile Include="Commands\StartupGroupsControl.xaml.cs">
+      <DependentUpon>StartupGroupsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Shared\StatusBarInjector.cs" />
     <Compile Include="StartupProjectPackage.cs" />
     <Compile Include="VSCommandTable.cs">
@@ -92,6 +102,7 @@
       <Link>Resources\LICENSE</Link>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Content Include="Commands\Resources\StartupGroupsCommand.png" />
     <Content Include="source.extension.ico">
       <DependentUpon>source.extension.vsixmanifest</DependentUpon>
     </Content>
@@ -255,6 +266,19 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Commands\NewStartupProjectGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Commands\StartupGroupsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />

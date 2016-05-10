@@ -168,5 +168,15 @@ namespace StartupProjects.Shared
             hierarchy.GetProperty(VSConstants.VSITEMID_ROOT, (int)__VSHPROPID.VSHPROPID_ExtObject, out obj);
             return obj as Project;
         }
+
+        public static IVsUIShell GetVsUiShell()
+        {
+            return (IVsUIShell) _serviceProvider.GetService(typeof(SVsUIShell));
+        }
+
+        public static DTE2 GetDetService()
+        {
+            return (DTE2)_serviceProvider.GetService(typeof(DTE));
+        }
     }
 }

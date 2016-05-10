@@ -21,6 +21,7 @@ namespace StartupProjects
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [Guid("a6f62261-b200-41f4-8827-3ce7ff087848")]
     [ProvideAutoLoad(UIContextGuids.SolutionExists)]
+    [ProvideToolWindow(typeof(StartupProjects.Commands.StartupGroups))]
     public sealed class StartupProjectPackage : Package
     {
         protected override void Initialize()
@@ -34,6 +35,7 @@ namespace StartupProjects
             {
                 NumberOfProjectCommandHandler.Initialize(this);
             }), DispatcherPriority.ApplicationIdle, null);
+            StartupProjects.Commands.StartupGroupsCommand.Initialize(this);
         }
 
         public StartupProjectPackage()
