@@ -122,6 +122,11 @@ namespace StartupProjects.Shared
             return startUpProjects.Select(x => GetProjectByUniqueName(x.ToString()));
         }
 
+        public static IEnumerable<string> GetAllProject()
+        {
+            return GetAllProjectsInSolution().Select(x => GetProjectByUniqueName(x.UniqueName));
+        }
+
         public static IEnumerable<Project> GetAllProjectsInSolution()
         {
             var solution = (IVsSolution)_serviceProvider.GetService(typeof(IVsSolution));
@@ -129,7 +134,7 @@ namespace StartupProjects.Shared
             foreach (IVsHierarchy hier in GetProjectsInSolution(solution))
             {
                 EnvDTE.Project project = GetDTEProject(hier);
-                if (project != null)
+                if (!string.IsNullOrWhiteSpace(project?.FileName))
                     yield return project;
             }
         }

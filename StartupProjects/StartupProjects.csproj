@@ -78,6 +78,8 @@
     <Compile Include="Commands\NewStartupProjectGroup.xaml.cs">
       <DependentUpon>NewStartupProjectGroup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ProjectGroups.cs" />
+    <Compile Include="ViewModels\ProjectGroup.cs" />
     <Compile Include="Commands\RemoveFromStartUpProjectsCommand.cs" />
     <Compile Include="Commands\StartupGroups.cs" />
     <Compile Include="Commands\StartupGroupsCommand.cs" />
@@ -87,6 +89,9 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Shared\StatusBarInjector.cs" />
     <Compile Include="StartupProjectPackage.cs" />
+    <Compile Include="ViewModels\ProjectViewModel.cs" />
+    <Compile Include="ViewModels\StartupGroupViewModel.cs" />
+    <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="VSCommandTable.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -277,9 +282,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

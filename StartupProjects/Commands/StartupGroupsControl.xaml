@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             Background="{DynamicResource VsBrush.Window}"
-             Foreground="{DynamicResource VsBrush.WindowText}"
+             xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.14.0"
+             Background="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowBackgroundKey}}"
+             BorderBrush="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowBorderKey}}"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              Name="MyToolWindow">
@@ -15,18 +16,28 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0">
-            <ToolBarPanel DockPanel.Dock="Top">
+            <ToolBarPanel DockPanel.Dock="Top" Background="{DynamicResource VsBrush.Menu}"
+                          >
                 <ToolBar ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded">
-                    <Menu ToolBar.OverflowMode="Never">
-                        <MenuItem Name="mnuNew" IsEnabled="False" Header="New..." Click="MenuItem_Click" />
-                        <MenuItem Name="mnuEdit" IsEnabled="False" Header="Edit..." />
-                        <MenuItem Name="mnuDelete" IsEnabled="False" Header="Delete..." />
+                    <Menu ToolBar.OverflowMode="Never"
+                            Background="{DynamicResource {x:Static vsfx:VsBrushes.CommandBarMenuBackgroundGradientKey}}">
+                        <MenuItem Name="mnuNew"
+                                  Foreground="{DynamicResource {x:Static vsfx:VsBrushes.MenuTextKey}}"
+                                  IsEnabled="False" Header="New..." Click="MenuItem_Click" />
+                        <MenuItem 
+                            Foreground="{DynamicResource {x:Static vsfx:VsBrushes.MenuTextKey}}"
+                            Name="mnuEdit" IsEnabled="False" Header="Edit..." />
+                        <MenuItem 
+                            Foreground="{DynamicResource {x:Static vsfx:VsBrushes.MenuTextKey}}"
+                            Name="mnuDelete" IsEnabled="False" Header="Delete..." />
                     </Menu>
                 </ToolBar>
             </ToolBarPanel>
         </DockPanel>
 
-        <TreeView x:Name="trvGroups" Grid.Row="1" />
+        <TreeView 
+            Background="{DynamicResource {x:Static vsfx:VsBrushes.GridHeadingBackgroundKey}}"
+            x:Name="trvGroups" Grid.Row="1" />
 
     </Grid>
 </UserControl>

@@ -4,9 +4,36 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:StartupProjects.Commands"
+             xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.14.0"
+             Background="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowBackgroundKey}}"
+             BorderBrush="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowBorderKey}}"
+
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+             >
+    <StackPanel Margin="10,0,10,10">
+        <TextBlock Text="Name"
+            Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}"
+                   ></TextBlock>
+        <TextBox Text="{Binding GroupName}"
+                              Background="{DynamicResource {x:Static vsfx:VsBrushes.SearchBoxBackgroundKey}}"
+                Foreground="{DynamicResource {x:Static vsfx:VsBrushes.WindowTextKey}}" Height="25"
+                 ></TextBox>
+
+        <ListView ItemsSource="{Binding Projects}" x:Name="lstProjects">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding Selected}"></CheckBox>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Projects" DisplayMemberBinding="{Binding ProjectName}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button
+            Content="Add" Click="Button_Click"  HorizontalAlignment="Right" Width="81"></Button>
+    </StackPanel>
 </UserControl>

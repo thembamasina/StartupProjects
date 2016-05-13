@@ -5,16 +5,14 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows.Data;
 using EnvDTE;
 using Microsoft.Internal.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
-using Newtonsoft.Json;
 using StartupProjects.Shared;
+using StartupProjects.ViewModels;
 
 namespace StartupProjects.Commands
 {
@@ -29,6 +27,8 @@ namespace StartupProjects.Commands
     {
         private ProjectGroups _projectGroups;
         private CommandEvents _events;
+        private StartupGroupViewModel _startupGroupViewModel;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="StartupGroupsControl"/> class.
         /// </summary>
@@ -36,10 +36,8 @@ namespace StartupProjects.Commands
         {
             this.InitializeComponent();
             var dte = ProjectHelpers.GetDetService();
-
             _events = dte.Events.CommandEvents;
             _events.AfterExecute += AfterExecute;
-            //_projectGroups = new ProjectGroups();
         }
 
         private void LoadProjects()
@@ -80,26 +78,24 @@ namespace StartupProjects.Commands
         private void PopulateStartupGroups()
         {
             trvGroups.Items.Clear();
+            var prop = ProjectHelpers.Solution.Properties.Item("Name");
 
-            Property prop = ProjectHelpers.Solution.Properties.Item("Name");
-        
             var solutionNode = new TreeViewItem
             {
                 Header = prop.Value,
                 Focusable = false,
             };
 
-             
             foreach (var projectGroup in _projectGroups.Groups)
             {
                 var projectNode = AddNode(projectGroup.GroupName, solutionNode);
-                foreach (var projectName in projectGroup.ProjectNames)
+                foreach (var projectName in projectGroup.SelectedProjects)
                 {
                     var projectNameNode = AddNode(projectName, projectNode);
                     projectNameNode.Focusable = false;
                 }
             }
-            
+
             trvGroups.Items.Add(solutionNode);
         }
 
@@ -111,10 +107,6 @@ namespace StartupProjects.Commands
             };
             parent.Items.Add(treeViewItem);
             return treeViewItem;
-        }
-
-        private void NewButtonClicked(object sender, RoutedEventArgs e)
-        {
         }
 
         private void DeleteButtonClicked(object sender, RoutedEventArgs e)
@@ -141,88 +133,31 @@ namespace StartupProjects.Commands
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             var uiShell = ProjectHelpers.GetVsUiShell();
-            var testDialog2 = new MyPopup(uiShell);
+            var newGroup = new MyPopup(uiShell);
             //get the owner of this dialog
             IntPtr hwnd;
             uiShell.GetDialogOwnerHwnd(out hwnd);
-            testDialog2.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
+            newGroup.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
             uiShell.EnableModeless(0);
             try
             {
-                testDialog2.Content = new StartupGroupsControl();
-                WindowHelper.ShowModal(testDialog2, hwnd);
+                _startupGroupViewModel = new StartupGroupViewModel(ProjectHelpers.GetAllProject());
+                var content = new NewStartupProjectGroup {DataContext = _startupGroupViewModel};
+                newGroup.Title = "New Startup Group";
+                newGroup.Content = content;
+                WindowHelper.ShowModal(newGroup, hwnd);
+
+                var addedGroup = newGroup.Content as NewStartupProjectGroup;
+                _projectGroups.Add(addedGroup.ProjectGroup);
+                _projectGroups.SaveStartupProjects();
+
+                PopulateStartupGroups();
             }
             finally
             {
                 // This will take place after the window is closed.
                 uiShell.EnableModeless(1);
             }
-        }
-    }
-
-
-    public class ProjectGroup
-    {
-        public ProjectGroup(string groupName)
-        {
-            ProjectNames = new List<string>();
-            GroupName = groupName;
-        }
-
-        public string GroupName { get; set; }
-        public List<string> ProjectNames { get; }
-        public bool IsSelected { get; set; }
-        public void AddProject(string projectName)
-        {
-            ProjectNames.Add(projectName);
-        }
-    }
-
-    public class ProjectGroups
-    {
-        private readonly string _startupsJsonPath;
-
-        public ProjectGroups()
-        {
-            Groups = new List<ProjectGroup>();
-            var path = ProjectHelpers.Solution.FullName;
-            if (string.IsNullOrEmpty(path))
-            {
-                return;
-            }
-
-            var solutionFolder = Path.GetDirectoryName(path);
-            _startupsJsonPath = Path.Combine(solutionFolder, "startups.json");
-
-            if (!File.Exists(_startupsJsonPath))
-            {
-                File.Create(_startupsJsonPath);
-            }
-        }
-
-        public void ReadStartupProjects()
-        {
-            if (string.IsNullOrWhiteSpace(_startupsJsonPath))
-            {
-                return;
-            }
-
-            var groups = File.ReadAllText(_startupsJsonPath);
-            var startups = JsonConvert.DeserializeObject<ProjectGroups>(groups);
-            this.Groups = startups.Groups;
-        }
-
-        private void SaveStartupProjects()
-        {
-            var startups = JsonConvert.SerializeObject(_startupsJsonPath);
-            File.WriteAllText(_startupsJsonPath, startups);
-        }
-
-        public List<ProjectGroup> Groups { get; private set; }
-
-        public void Add(ProjectGroup group)
-        {
-            Groups.Add(group);
         }
     }
 }

@@ -1,30 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Microsoft.VisualStudio.PlatformUI;
+using StartupProjects.ViewModels;
 
 namespace StartupProjects.Commands
 {
     /// <summary>
-    /// Interaction logic for NewStartupProjectGroup.xaml
+    ///     Interaction logic for NewStartupProjectGroup.xaml
     /// </summary>
     public partial class NewStartupProjectGroup : UserControl
     {
-        public NewStartupProjectGroup(List<string> projectsInSolution)
+        public NewStartupProjectGroup()
         {
             InitializeComponent();
-
-            
+        }
+        public ProjectGroup ProjectGroup { get; private set; }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as StartupGroupViewModel;
+            ProjectGroup = vm.ProjectGroup;
+            (Parent as DialogWindow).DialogResult = true;
         }
     }
 }
