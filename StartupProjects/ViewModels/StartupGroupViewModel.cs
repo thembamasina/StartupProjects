@@ -59,25 +59,7 @@ namespace StartupProjects.ViewModels
             }
         }
 
-        public ICommand _command;
-        private ICommand _okCommand;
-
-        public ICommand OkCommand
-        {
-            get
-            {
-                if (_command == null)
-                {
-                    var message = string.Join(",", ProjectGroup.SelectedProjects);
-                    _command = new DelegateCommand(GetProjectGroup, CanExecute);
-                }
-
-                return _okCommand;
-            }
-            set { _okCommand = value; }
-        }
-
-        private bool CanExecute(object o)
+       private bool CanExecute(object o)
         {
             return !string.IsNullOrWhiteSpace(_groupName) && _projects.Any(x => x.Selected);
         }

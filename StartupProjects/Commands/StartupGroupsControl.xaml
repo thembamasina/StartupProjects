@@ -29,7 +29,7 @@
                             Name="mnuEdit" IsEnabled="False" Header="Edit..." />
                         <MenuItem 
                             Foreground="{DynamicResource {x:Static vsfx:VsBrushes.MenuTextKey}}"
-                            Name="mnuDelete" IsEnabled="False" Header="Delete..." />
+                            Name="mnuDelete" IsEnabled="False" Click="DeleteClick" Header="Delete..." />
                         <MenuItem 
                             Foreground="{DynamicResource {x:Static vsfx:VsBrushes.MenuTextKey}}"
                             Name="mnuSetAsStartupGroup" Click="SetAsStartUpGroup" IsEnabled="False" Header="Set As Startup Group..." />

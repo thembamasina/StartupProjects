@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 using StartupProjects.Shared;
 
@@ -46,7 +47,7 @@ namespace StartupProjects.ViewModels
 
         public void SaveStartupProjects()
         {
-            var groups = JsonConvert.SerializeObject(Groups);
+            var groups = JsonConvert.SerializeObject(Groups.Where(x => x != null));
             File.WriteAllText(_startupsJsonPath, groups);
         }
 
@@ -55,6 +56,11 @@ namespace StartupProjects.ViewModels
         public void Add(ProjectGroup group)
         {
             Groups.Add(group);
+        }
+
+        public void Remove(ProjectGroup group)
+        {
+            Groups.Remove(group);
         }
     }
 }

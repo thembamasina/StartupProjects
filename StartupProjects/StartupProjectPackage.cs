@@ -31,12 +31,11 @@ namespace StartupProjects
             RemoveFromStartUpProjectsCommand.Initialize(this);
             base.Initialize();
 
-            NumberOfProjectCommandHandler.Initialize(this);
-/*
+            
             Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
             {
+                NumberOfProjectCommandHandler.Initialize(this);
             }), DispatcherPriority.ApplicationIdle, null);
-*/
             StartupGroupsCommand.Initialize(this);
         }
 

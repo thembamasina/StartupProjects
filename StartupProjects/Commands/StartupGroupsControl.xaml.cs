@@ -7,6 +7,7 @@
 using System;
 using System.Linq;
 using System.Windows.Data;
+using System.Windows.Forms;
 using EnvDTE;
 using Microsoft.Internal.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.Shell;
@@ -84,6 +85,7 @@ namespace StartupProjects.Commands
             {
                 Header = prop.Value,
                 Focusable = false,
+                IsExpanded = true
             };
 
             foreach (var projectGroup in _projectGroups.Groups.Where(x=>x != null))
@@ -97,6 +99,7 @@ namespace StartupProjects.Commands
             }
 
             trvGroups.Items.Add(solutionNode);
+            
         }
 
         private TreeViewItem AddNode(string text, TreeViewItem parent)
@@ -179,17 +182,28 @@ namespace StartupProjects.Commands
         private void trvGroups_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             var selected = e.NewValue as TreeViewItem;
+            mnuSetAsStartupGroup.IsEnabled = false;
+            mnuDelete.IsEnabled = false;
 
-            if (selected != null)
-            {
-                mnuSetAsStartupGroup.IsEnabled = true;
-                var vm = DataContext as StartupGroupViewModel;
+            if (selected == null) return;
 
-                var selectedGroup = _projectGroups.Groups.Where(x=> x!=null).First(x => x.GroupName == selected.Header.ToString());
-                _projectGroups.Groups.Where(x => x != null).ToList().ForEach(p => p.IsSelected = false);
+            mnuSetAsStartupGroup.IsEnabled = true;
+            mnuDelete.IsEnabled = true;
 
-                selectedGroup.IsSelected = true;
-            }
+            var vm = DataContext as StartupGroupViewModel;
+            var selectedGroup = _projectGroups.Groups.Where(x=> x!=null).First(x => x.GroupName == selected.Header.ToString());
+            _projectGroups.Groups.Where(x => x != null).ToList().ForEach(p => p.IsSelected = false);
+
+            selectedGroup.IsSelected = true;
+        }
+
+        private void DeleteClick(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as StartupGroupViewModel;
+            var selectedGroup = _projectGroups.Groups.First(x=>x.IsSelected);
+            _projectGroups.Remove(selectedGroup);
+            _projectGroups.SaveStartupProjects();
+            PopulateStartupGroups();
         }
     }
 }

@@ -200,19 +200,19 @@ namespace StartupProjects.Shared
         {
             if (selectedProjects.Length == 1)
             {
-                SetStartupProject(selectedProjects[0].ToString());
+                SetStartupProject(GetProjectByName(selectedProjects[0].ToString()));
             }
             else
             {
-                Solution.SolutionBuild.StartupProjects = null;
-                Solution.SaveAs(Solution.FileName);
+                object[] projects = selectedProjects.Select(p => (object)GetProjectByName(p.ToString())).ToArray();
 
+                Solution.SolutionBuild.StartupProjects = projects;
+                Solution.SaveAs(Solution.FileName);
+/*
                 foreach (var selectedProject in selectedProjects)
                 {
-
                     var projectName = GetProjectByName(selectedProject.ToString());
-                    AddToStartupProjects(projectName);
-                }
+                }*/
             }
         }
     }
