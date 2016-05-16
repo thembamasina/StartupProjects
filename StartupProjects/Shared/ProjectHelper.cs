@@ -61,7 +61,6 @@ namespace StartupProjects.Shared
 
             startupProjects.Add(selectedProject);
             Solution.SolutionBuild.StartupProjects = startupProjects.ToArray();
-            Solution.SaveAs(Solution.FileName);
         }
 
         public static void RemoveFromtartupProjects(string selectedProject)
@@ -110,6 +109,19 @@ namespace StartupProjects.Shared
                 if (project.UniqueName == startupProject)
                 {
                     string s = project.Name;
+                    return s;
+                }
+            }
+            return null;
+        }
+
+        private static string GetProjectByName(string startupProject)
+        {
+            foreach (Project project in GetAllProjectsInSolution())
+            {
+                if (project.Name == startupProject)
+                {
+                    string s = project.UniqueName;
                     return s;
                 }
             }
@@ -179,9 +191,29 @@ namespace StartupProjects.Shared
             return (IVsUIShell) _serviceProvider.GetService(typeof(SVsUIShell));
         }
 
-        public static DTE2 GetDetService()
+        public static DTE2 GetDteService()
         {
             return (DTE2)_serviceProvider.GetService(typeof(DTE));
+        }
+
+        public static void SetStartupProjects(object[] selectedProjects)
+        {
+            if (selectedProjects.Length == 1)
+            {
+                SetStartupProject(selectedProjects[0].ToString());
+            }
+            else
+            {
+                Solution.SolutionBuild.StartupProjects = null;
+                Solution.SaveAs(Solution.FileName);
+
+                foreach (var selectedProject in selectedProjects)
+                {
+
+                    var projectName = GetProjectByName(selectedProject.ToString());
+                    AddToStartupProjects(projectName);
+                }
+            }
         }
     }
 }

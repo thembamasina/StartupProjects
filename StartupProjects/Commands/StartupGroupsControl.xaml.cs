@@ -35,7 +35,7 @@ namespace StartupProjects.Commands
         public StartupGroupsControl()
         {
             this.InitializeComponent();
-            var dte = ProjectHelpers.GetDetService();
+            var dte = ProjectHelpers.GetDteService();
             _events = dte.Events.CommandEvents;
             _events.AfterExecute += AfterExecute;
         }
@@ -72,6 +72,7 @@ namespace StartupProjects.Commands
                 mnuDelete.IsEnabled = false;
                 mnuEdit.IsEnabled = false;
                 mnuNew.IsEnabled = false;
+                mnuSetAsStartupGroup.IsChecked = false;
             }
         }
 
@@ -86,7 +87,7 @@ namespace StartupProjects.Commands
                 Focusable = false,
             };
 
-            foreach (var projectGroup in _projectGroups.Groups)
+            foreach (var projectGroup in _projectGroups.Groups.Where(x=>x != null))
             {
                 var projectNode = AddNode(projectGroup.GroupName, solutionNode);
                 foreach (var projectName in projectGroup.SelectedProjects)
@@ -157,6 +158,29 @@ namespace StartupProjects.Commands
             {
                 // This will take place after the window is closed.
                 uiShell.EnableModeless(1);
+            }
+        }
+
+        private void SetAsStartUpGroup(object sender, RoutedEventArgs e)
+        {
+            var selectedProjects = _projectGroups.Groups.First(x => x.IsSelected).SelectedProjects.ToArray<object>();
+
+            ProjectHelpers.SetStartupProjects(selectedProjects);
+        }
+
+        private void trvGroups_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            var selected = e.NewValue as TreeViewItem;
+
+            if (selected != null)
+            {
+                mnuSetAsStartupGroup.IsEnabled = true;
+                var vm = DataContext as StartupGroupViewModel;
+
+                var selectedGroup = _projectGroups.Groups.Where(x=> x!=null).First(x => x.GroupName == selected.Header.ToString());
+                _projectGroups.Groups.Where(x => x != null).ToList().ForEach(p => p.IsSelected = false);
+
+                selectedGroup.IsSelected = true;
             }
         }
     }

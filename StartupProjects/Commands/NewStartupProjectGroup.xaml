@@ -19,7 +19,11 @@
                 Foreground="{DynamicResource {x:Static vsfx:VsBrushes.WindowTextKey}}" Height="25"
                  ></TextBox>
 
-        <ListView ItemsSource="{Binding Projects}" x:Name="lstProjects">
+        <ListView ItemsSource="{Binding Projects}" x:Name="lstProjects" 
+                   VirtualizingStackPanel.IsVirtualizing="True"
+                               Background="{DynamicResource {x:Static vsfx:VsBrushes.ComboBoxBackgroundKey}}"
+                  Foreground="{DynamicResource {x:Static vsfx:VsBrushes.WindowTextKey}}"
+                  >
             <ListView.View>
                 <GridView>
                     <GridViewColumn>
