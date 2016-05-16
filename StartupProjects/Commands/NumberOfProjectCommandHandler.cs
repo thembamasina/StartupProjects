@@ -20,42 +20,25 @@ namespace StartupProjects.Commands
         {
             Foreground = Brushes.White,
             FontWeight = FontWeights.SemiBold,
-            Margin = new Thickness(5, 4, 10, 0)
+            Margin = new Thickness(5, 4, 10, 0),
+            Name ="txtNumberOfPRojects"
         };
 
         private DTE2 _dte;
         private StatusBarInjector _injector;
         private CommandEvents _events;
-        private SolutionEvents _solutionEvents;
 
         private NumberOfProjectCommandHandler(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             _dte = (DTE2)serviceProvider.GetService(typeof(DTE));
             _events = _dte.Events.CommandEvents;
-
-            _solutionEvents = _dte.Events.SolutionEvents;
-/*
-            _solutionEvents.ProjectAdded += _solutionEvents_ProjectAdded;
-            _solutionEvents.ProjectRemoved += _solutionEvents_ProjectAdded;
-*/
-
             _events.AfterExecute += AfterExecute;
             _control.MouseLeftButtonUp += ShowStartupProjects;
-
             _injector = new StatusBarInjector(Application.Current.MainWindow);
             _injector.InjectControl(_control);
         }
 
-        /*private void _solutionEvents_ProjectAdded(Project Project)
-        {
-            var numberOfStartupProjects = ProjectHelpers.NumberOfStartupProjects;
-            _control.Dispatcher.Invoke(() =>
-            {
-                _control.Text = $"Startup Projects: {numberOfStartupProjects}";
-            });
-        }
-*/
         private void ShowStartupProjects(object sender, MouseButtonEventArgs e)
         {
             var message = string.Join(Environment.NewLine, ProjectHelpers.GetStartUpProjectName());

@@ -28,7 +28,6 @@ namespace StartupProjects.Commands
         private ProjectGroups _projectGroups;
         private CommandEvents _events;
         private StartupGroupViewModel _startupGroupViewModel;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="StartupGroupsControl"/> class.
         /// </summary>
@@ -166,6 +165,15 @@ namespace StartupProjects.Commands
             var selectedProjects = _projectGroups.Groups.First(x => x.IsSelected).SelectedProjects.ToArray<object>();
 
             ProjectHelpers.SetStartupProjects(selectedProjects);
+            var control = StatusBarInjector.FindChild(Application.Current.MainWindow, "txtNumberOfPRojects");
+            var textblock = control as TextBlock;
+            if (textblock == null) return;
+
+            var numberOfStartupProjects = ProjectHelpers.NumberOfStartupProjects;
+            textblock.Dispatcher.Invoke(() =>
+            {
+                textblock.Text = $"Startup Projects: {numberOfStartupProjects}";
+            });
         }
 
         private void trvGroups_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)

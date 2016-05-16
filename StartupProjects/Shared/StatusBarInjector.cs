@@ -20,7 +20,7 @@ namespace StartupProjects.Shared
             FindStatusBar();
         }
 
-        private static DependencyObject FindChild(DependencyObject parent, string childName)
+        public static DependencyObject FindChild(DependencyObject parent, string childName)
         {
             if (parent == null)
             {
