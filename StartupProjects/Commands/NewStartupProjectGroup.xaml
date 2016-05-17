@@ -10,7 +10,7 @@
 
              mc:Ignorable="d" 
              >
-    <StackPanel Margin="10,0,10,10">
+    <StackPanel>
         <TextBlock Text="Name"
             Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}"
                    ></TextBlock>
@@ -18,25 +18,26 @@
                               Background="{DynamicResource {x:Static vsfx:VsBrushes.SearchBoxBackgroundKey}}"
                 Foreground="{DynamicResource {x:Static vsfx:VsBrushes.WindowTextKey}}" Height="25"
                  ></TextBox>
-
-        <ListView ItemsSource="{Binding Projects}" x:Name="lstProjects" 
+        <ScrollViewer Grid.Row="1" CanContentScroll="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <ListView ItemsSource="{Binding Projects}" x:Name="lstProjects" 
                    VirtualizingStackPanel.IsVirtualizing="True"
                                Background="{DynamicResource {x:Static vsfx:VsBrushes.ComboBoxBackgroundKey}}"
                   Foreground="{DynamicResource {x:Static vsfx:VsBrushes.WindowTextKey}}"
                   >
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox IsChecked="{Binding Selected}"></CheckBox>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="Projects" DisplayMemberBinding="{Binding ProjectName}"></GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Selected}"></CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Projects" DisplayMemberBinding="{Binding ProjectName}"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </ScrollViewer>
         <Button
             Content="Add" Click="Button_Click"  HorizontalAlignment="Right" Width="81"></Button>
     </StackPanel>

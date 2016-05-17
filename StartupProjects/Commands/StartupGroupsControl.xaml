@@ -38,11 +38,12 @@
             </ToolBarPanel>
         </DockPanel>
 
+        <ScrollViewer Grid.Row="1" CanContentScroll="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <TreeView 
             VirtualizingStackPanel.IsVirtualizing="True"
             VirtualizingStackPanel.VirtualizationMode="Recycling"
-            x:Name="trvGroups" Grid.Row="1" SelectedItemChanged="trvGroups_SelectedItemChanged" />
-
+            x:Name="trvGroups" SelectedItemChanged="trvGroups_SelectedItemChanged" />
+        </ScrollViewer>
     </Grid>
 </UserControl>
 
