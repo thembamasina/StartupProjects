@@ -7,20 +7,26 @@
              xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.14.0"
              Background="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowBackgroundKey}}"
              BorderBrush="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowBorderKey}}"
-
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              >
-    <StackPanel>
-        <TextBlock Text="Name"
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Name" Grid.Row="0"
             Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}"
                    ></TextBlock>
-        <TextBox Text="{Binding GroupName}"
+        <TextBox Text="{Binding GroupName}" Grid.Row="1"
                               Background="{DynamicResource {x:Static vsfx:VsBrushes.SearchBoxBackgroundKey}}"
-                Foreground="{DynamicResource {x:Static vsfx:VsBrushes.WindowTextKey}}" Height="25"
+                Foreground="{DynamicResource {x:Static vsfx:VsBrushes.WindowTextKey}}"
                  ></TextBox>
-        <ScrollViewer Grid.Row="1" CanContentScroll="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="2" CanContentScroll="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <ListView ItemsSource="{Binding Projects}" x:Name="lstProjects" 
                    VirtualizingStackPanel.IsVirtualizing="True"
+                      
                                Background="{DynamicResource {x:Static vsfx:VsBrushes.ComboBoxBackgroundKey}}"
                   Foreground="{DynamicResource {x:Static vsfx:VsBrushes.WindowTextKey}}"
                   >
@@ -38,7 +44,7 @@
                 </ListView.View>
             </ListView>
         </ScrollViewer>
-        <Button
+        <Button Grid.Row="3"
             Content="Add" Click="Button_Click"  HorizontalAlignment="Right" Width="81"></Button>
-    </StackPanel>
+    </Grid>
 </UserControl>
