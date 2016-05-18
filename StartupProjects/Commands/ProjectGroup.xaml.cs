@@ -17,7 +17,7 @@ namespace StartupProjects.Commands
         public ProjectGroup ProjectGroup { get; private set; }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var vm = DataContext as StartupGroupViewModel;
+            var vm = DataContext as ProjectGroupViewModel;
             ProjectGroup = vm.ProjectGroup;
             (Parent as DialogWindow).DialogResult = true;
         }

@@ -28,7 +28,7 @@
                         <MenuItem 
                             Name="mnuDelete" IsEnabled="False" Click="DeleteClick" Header="Delete..." />
                         <MenuItem 
-                            Name="mnuSetAsStartupGroup" Click="SetAsStartUpGroup" IsEnabled="False" Header="Set As Startup Group..." />
+                            Name="mnuSetAsStartupGroup" Click="SetAsStartUpGroup" IsEnabled="False" Header="Set as Startup.." />
                     </Menu>
                 </ToolBar>
             </ToolBarPanel>

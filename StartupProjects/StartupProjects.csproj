@@ -75,22 +75,22 @@
   <ItemGroup>
     <Compile Include="Commands\AddToStartupProjectCommand.cs" />
     <Compile Include="Commands\MyPopup.cs" />
-    <Compile Include="Commands\NewStartupProjectGroup.xaml.cs">
-      <DependentUpon>NewStartupProjectGroup.xaml</DependentUpon>
+    <Compile Include="Commands\ProjectGroup.xaml.cs">
+      <DependentUpon>ProjectGroup.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ProjectGroups.cs" />
     <Compile Include="ViewModels\ProjectGroup.cs" />
     <Compile Include="Commands\RemoveFromStartUpProjectsCommand.cs" />
     <Compile Include="Commands\StartupGroups.cs" />
     <Compile Include="Commands\StartupGroupsCommand.cs" />
-    <Compile Include="Commands\StartupGroupsControl.xaml.cs">
-      <DependentUpon>StartupGroupsControl.xaml</DependentUpon>
+    <Compile Include="Commands\ProjectGroupsControl.xaml.cs">
+      <DependentUpon>ProjectGroupsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Shared\StatusBarInjector.cs" />
     <Compile Include="StartupProjectPackage.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
-    <Compile Include="ViewModels\StartupGroupViewModel.cs" />
+    <Compile Include="ViewModels\ProjectGroupViewModel.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="VSCommandTable.cs">
       <AutoGen>True</AutoGen>
@@ -273,11 +273,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Commands\NewStartupProjectGroup.xaml">
+    <Page Include="Commands\ProjectGroup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Commands\StartupGroupsControl.xaml">
+    <Page Include="Commands\ProjectGroupsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

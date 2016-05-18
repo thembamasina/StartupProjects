@@ -6,29 +6,23 @@
 
 using System;
 using System.Linq;
-using System.Windows.Data;
-using System.Windows.Forms;
 using EnvDTE;
 using Microsoft.Internal.VisualStudio.PlatformUI;
-using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
 using StartupProjects.Shared;
 using StartupProjects.ViewModels;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace StartupProjects.Commands
 {
-    using System.Diagnostics.CodeAnalysis;
-    using System.Windows;
-    using System.Windows.Controls;
-
     /// <summary>
     /// Interaction logic for StartupGroupsControl.
     /// </summary>
     public partial class StartupGroupsControl : UserControl
     {
         private ProjectGroups _projectGroups;
-        private CommandEvents _events;
-        private StartupGroupViewModel _startupGroupViewModel;
+        private SolutionEvents _solutionEvents;
+        private ProjectGroupViewModel _projectGroupViewModel;
         /// <summary>
         /// Initializes a new instance of the <see cref="StartupGroupsControl"/> class.
         /// </summary>
@@ -36,8 +30,25 @@ namespace StartupProjects.Commands
         {
             this.InitializeComponent();
             var dte = ProjectHelpers.GetDteService();
-            _events = dte.Events.CommandEvents;
-            _events.AfterExecute += AfterExecute;
+            _solutionEvents = dte.Events.SolutionEvents;
+            _solutionEvents.Opened += _solutionEvents_Opened;
+            _solutionEvents.BeforeClosing += SolutionEventsOnBeforeClosing;
+        }
+
+        private void SolutionEventsOnBeforeClosing()
+        {
+            _projectGroups = null;
+            trvGroups.Items.Clear();
+            mnuDelete.IsEnabled = false;
+            mnuEdit.IsEnabled = false;
+            mnuNew.IsEnabled = false;
+            mnuSetAsStartupGroup.IsEnabled = false;
+        }
+
+        private void _solutionEvents_Opened()
+        {
+            LoadProjects();
+            mnuNew.IsEnabled = true;
         }
 
         private void LoadProjects()
@@ -52,27 +63,6 @@ namespace StartupProjects.Commands
             if (_projectGroups.Groups.Any())
             {
                 PopulateStartupGroups();
-            }
-        }
-
-        private void AfterExecute(string guid, int id, object customin, object customout)
-        {
-            if (!string.IsNullOrWhiteSpace(ProjectHelpers.Solution.FullName))
-            {
-                LoadProjects();
-
-                mnuDelete.IsEnabled = true;
-                mnuEdit.IsEnabled = true;
-                mnuNew.IsEnabled = true;
-            }
-            else
-            {
-                _projectGroups = null;
-                trvGroups.Items.Clear();
-                mnuDelete.IsEnabled = false;
-                mnuEdit.IsEnabled = false;
-                mnuNew.IsEnabled = false;
-                mnuSetAsStartupGroup.IsChecked = false;
             }
         }
 
@@ -140,13 +130,13 @@ namespace StartupProjects.Commands
             //get the owner of this dialog
             IntPtr hwnd;
             uiShell.GetDialogOwnerHwnd(out hwnd);
-            newGroup.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterOwner;
+            newGroup.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             uiShell.EnableModeless(0);
             try
             {
-                _startupGroupViewModel = new StartupGroupViewModel(ProjectHelpers.GetAllProject());
-                var content = new NewStartupProjectGroup {DataContext = _startupGroupViewModel};
-                newGroup.Title = "New Startup Group";
+                _projectGroupViewModel = new ProjectGroupViewModel(ProjectHelpers.GetAllProject());
+                var content = new NewStartupProjectGroup {DataContext = _projectGroupViewModel};
+                newGroup.Title = "Project Group";
                 newGroup.Content = content;
                 WindowHelper.ShowModal(newGroup, hwnd);
 
@@ -190,7 +180,7 @@ namespace StartupProjects.Commands
             mnuSetAsStartupGroup.IsEnabled = true;
             mnuDelete.IsEnabled = true;
 
-            var vm = DataContext as StartupGroupViewModel;
+            var vm = DataContext as ProjectGroupViewModel;
             var selectedGroup = _projectGroups.Groups.Where(x=> x!=null).First(x => x.GroupName == selected.Header.ToString());
             _projectGroups.Groups.Where(x => x != null).ToList().ForEach(p => p.IsSelected = false);
 
@@ -199,7 +189,7 @@ namespace StartupProjects.Commands
 
         private void DeleteClick(object sender, RoutedEventArgs e)
         {
-            var vm = DataContext as StartupGroupViewModel;
+            var vm = DataContext as ProjectGroupViewModel;
             var selectedGroup = _projectGroups.Groups.First(x=>x.IsSelected);
             _projectGroups.Remove(selectedGroup);
             _projectGroups.SaveStartupProjects();

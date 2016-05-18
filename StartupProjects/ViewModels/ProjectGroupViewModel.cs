@@ -14,7 +14,7 @@ using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace StartupProjects.ViewModels
 {
-    public class StartupGroupViewModel : ViewModel 
+    public class ProjectGroupViewModel : ViewModel 
     {
         private string _groupName;
         private ObservableCollection<ProjectViewModel> _projects;
@@ -41,7 +41,7 @@ namespace StartupProjects.ViewModels
             }
         }
 
-        public StartupGroupViewModel(IEnumerable<string> projects)
+        public ProjectGroupViewModel(IEnumerable<string> projects)
         {
             Projects = new ObservableCollection<ProjectViewModel>(
                 projects

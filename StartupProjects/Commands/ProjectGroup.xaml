@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:StartupProjects.Commands"
              xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.14.0"
              Background="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowBackgroundKey}}"
              BorderBrush="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowBorderKey}}"
@@ -19,16 +18,10 @@
         <TextBlock Text="Name" Grid.Row="0"
             Foreground="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowTextKey}}"
                    ></TextBlock>
-        <TextBox Text="{Binding GroupName}" Grid.Row="1"
-                              Background="{DynamicResource {x:Static vsfx:VsBrushes.SearchBoxBackgroundKey}}"
-                Foreground="{DynamicResource {x:Static vsfx:VsBrushes.WindowTextKey}}"
-                 ></TextBox>
+        <TextBox Text="{Binding GroupName}" Grid.Row="1"></TextBox>
         <ScrollViewer Grid.Row="2" CanContentScroll="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <ListView ItemsSource="{Binding Projects}" x:Name="lstProjects" 
                    VirtualizingStackPanel.IsVirtualizing="True"
-                      
-                               Background="{DynamicResource {x:Static vsfx:VsBrushes.ComboBoxBackgroundKey}}"
-                  Foreground="{DynamicResource {x:Static vsfx:VsBrushes.WindowTextKey}}"
                   >
                 <ListView.View>
                     <GridView>
@@ -45,6 +38,6 @@
             </ListView>
         </ScrollViewer>
         <Button Grid.Row="3"
-            Content="Add" Click="Button_Click"  HorizontalAlignment="Right" Width="81"></Button>
+            Content="Add" Click="Button_Click"  HorizontalAlignment="Right" Width="81" ></Button>
     </Grid>
 </UserControl>
