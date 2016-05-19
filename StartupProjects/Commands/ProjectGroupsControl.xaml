@@ -16,24 +16,28 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <DockPanel DockPanel.Dock="Top" Grid.Row="0">
-            <ToolBarPanel>
-                <ToolBar ToolBarTray.IsLocked="True" Loaded="ToolBar_Loaded" Background="{DynamicResource {x:Static vsfx:VsBrushes.CommandBarGradientKey}}">
-                    <Menu ToolBar.OverflowMode="Never"
-                            >
-                        <MenuItem Name="mnuNew"
-                                  IsEnabled="False" Header="New..." Click="MenuItem_Click" />
-                        <MenuItem 
-                            Name="mnuEdit" IsEnabled="False" Header="Edit..." />
-                        <MenuItem 
-                            Name="mnuDelete" IsEnabled="False" Click="DeleteClick" Header="Delete..." />
-                        <MenuItem 
-                            Name="mnuSetAsStartupGroup" Click="SetAsStartUpGroup" IsEnabled="False" Header="Set as Startup.." />
-                    </Menu>
+        <ToolBarPanel Grid.Row="0">
+                <ToolBar 
+                    ToolBar.OverflowMode="Never" 
+                    ToolBarTray.IsLocked="True" 
+                    Loaded="ToolBar_Loaded" 
+                    Background="{DynamicResource {x:Static vsfx:VsBrushes.CommandBarGradientKey}}"
+                    >
+                <Button 
+                    Name="mnuNew" IsEnabled="False" Content="Add" ToolTip="Add" Click="MenuItem_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                    <!--<Image Source="/Resources/AddToStartupProjectCommand.png" />-->
+                </Button>
+                <Button Name="mnuEdit" Content="Edit" IsEnabled="False" ToolTip="Edit" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                    <!--<Image Source="/Resources/Edit.png" />-->
+                </Button>
+                <Separator></Separator>
+                <Button Name="mnuDelete" IsEnabled="False" Content="Delete" Click="DeleteClick" ToolTip="Delete" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+                    <!--<Image Source="/Resources/Remove.png"></Image>-->
+                </Button>
+                <Separator></Separator>
+                <Button Name="mnuSetAsStartupGroup" Click="SetAsStartUpGroup" IsEnabled="False" Content="Set as Startup..." ></Button>
                 </ToolBar>
             </ToolBarPanel>
-        </DockPanel>
-
         <ScrollViewer Grid.Row="1" CanContentScroll="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <TreeView
             VirtualizingStackPanel.IsVirtualizing="True"
