@@ -14,13 +14,14 @@ namespace StartupProjects.ViewModels
         {
             Groups = new List<ProjectGroup>();
             var path = ProjectHelpers.Solution.FullName;
+            var solutionName = ProjectHelpers.Solution.Properties.Item("Name").Value;
             if (string.IsNullOrEmpty(path))
             {
                 return;
             }
 
             var solutionFolder = Path.GetDirectoryName(path);
-            _startupsJsonPath = Path.Combine(solutionFolder, "startups.json");
+            _startupsJsonPath = Path.Combine(solutionFolder, string.Format("{0}-projects.groups", solutionName));
 
             if (!File.Exists(_startupsJsonPath))
             {
@@ -35,6 +36,11 @@ namespace StartupProjects.ViewModels
                 return;
             }
 
+            if (!File.Exists(_startupsJsonPath))
+            {
+                return;
+            }
+
             var groups = File.ReadAllText(_startupsJsonPath);
             if (string.IsNullOrWhiteSpace(groups))
             {
@@ -42,7 +48,7 @@ namespace StartupProjects.ViewModels
             }
 
             var startups = JsonConvert.DeserializeObject<List<ProjectGroup>>(groups);
-            this.Groups = startups;
+            Groups = startups;
         }
 
         public void SaveStartupProjects()

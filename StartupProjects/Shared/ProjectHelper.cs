@@ -21,6 +21,8 @@ namespace StartupProjects.Shared
             }
         }
 
+        public static IServiceProvider ServiceProvider => _serviceProvider;
+
         public static int NumberOfStartupProjects => GetStartUpProjects().Count;
 
         public static string GetProjects()

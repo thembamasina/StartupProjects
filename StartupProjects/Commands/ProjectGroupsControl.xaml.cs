@@ -12,6 +12,8 @@ using StartupProjects.Shared;
 using StartupProjects.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.VisualStudio.PlatformUI;
+using Microsoft.VisualStudio.Shell;
 
 namespace StartupProjects.Commands
 {
@@ -138,6 +140,8 @@ namespace StartupProjects.Commands
                 var content = new NewStartupProjectGroup {DataContext = _projectGroupViewModel};
                 newGroup.Title = "Project Group";
                 newGroup.Content = content;
+                newGroup.Background = content.Background;
+
                 WindowHelper.ShowModal(newGroup, hwnd);
 
                 var addedGroup = newGroup.Content as NewStartupProjectGroup;

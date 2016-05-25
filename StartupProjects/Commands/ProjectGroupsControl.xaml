@@ -6,7 +6,6 @@
              xmlns:vsfx="clr-namespace:Microsoft.VisualStudio.Shell;assembly=Microsoft.VisualStudio.Shell.14.0"
              xmlns:platformUi="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.14.0"
              Background="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowBackgroundKey}}"
-             BorderBrush="{DynamicResource {x:Static vsfx:VsBrushes.ToolWindowBorderKey}}"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              Name="MyToolWindow">
@@ -17,35 +16,56 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <ToolBarPanel Grid.Row="0">
-                <ToolBar 
+            <ToolBar 
                     ToolBar.OverflowMode="Never" 
                     ToolBarTray.IsLocked="True" 
                     Loaded="ToolBar_Loaded" 
                     Background="{DynamicResource {x:Static vsfx:VsBrushes.CommandBarGradientKey}}"
                     >
                 <Button 
+                    Background="{DynamicResource {x:Static vsfx:VsBrushes.EnvironmentBackgroundTextureKey}}" 
+                    Foreground="{DynamicResource {x:Static vsfx:VsBrushes.CommandBarTextActiveKey}}" 
                     Name="mnuNew" IsEnabled="False" Content="Add" ToolTip="Add" Click="MenuItem_Click" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                     <!--<Image Source="/Resources/AddToStartupProjectCommand.png" />-->
                 </Button>
-                <Button Name="mnuEdit" Content="Edit" IsEnabled="False" ToolTip="Edit" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                <Button 
+                    Background="{DynamicResource {x:Static vsfx:VsBrushes.EnvironmentBackgroundTextureKey}}" 
+                    Foreground="{DynamicResource {x:Static vsfx:VsBrushes.CommandBarTextActiveKey}}" 
+                    Name="mnuEdit" Content="Edit" IsEnabled="False" ToolTip="Edit" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
                     <!--<Image Source="/Resources/Edit.png" />-->
                 </Button>
                 <Separator></Separator>
-                <Button Name="mnuDelete" IsEnabled="False" Content="Delete" Click="DeleteClick" ToolTip="Delete" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+                <Button 
+                    Background="{DynamicResource {x:Static vsfx:VsBrushes.EnvironmentBackgroundTextureKey}}" 
+                    Foreground="{DynamicResource {x:Static vsfx:VsBrushes.CommandBarTextActiveKey}}" 
+                    Name="mnuDelete" IsEnabled="False" Content="Delete" Click="DeleteClick" ToolTip="Delete" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
                     <!--<Image Source="/Resources/Remove.png"></Image>-->
                 </Button>
                 <Separator></Separator>
-                <Button Name="mnuSetAsStartupGroup" Click="SetAsStartUpGroup" IsEnabled="False" Content="Set as Startup..." ></Button>
-                </ToolBar>
-            </ToolBarPanel>
+                <Button 
+                    Background="{DynamicResource {x:Static vsfx:VsBrushes.EnvironmentBackgroundTextureKey}}" 
+                    Foreground="{DynamicResource {x:Static vsfx:VsBrushes.CommandBarTextActiveKey}}" 
+                    Name="mnuSetAsStartupGroup" Click="SetAsStartUpGroup" IsEnabled="False" Content="Set as Startup..." ></Button>
+            </ToolBar>
+        </ToolBarPanel>
         <ScrollViewer Grid.Row="1" CanContentScroll="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <TreeView
+            <TreeView
+                Background="{DynamicResource {x:Static SystemColors.WindowBrush}}"
+                Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrush}}"
             VirtualizingStackPanel.IsVirtualizing="True"
             VirtualizingStackPanel.VirtualizationMode="Recycling"
-            x:Name="trvGroups" SelectedItemChanged="trvGroups_SelectedItemChanged" />
+            x:Name="trvGroups" SelectedItemChanged="trvGroups_SelectedItemChanged" >
+                <TreeView.Resources>
+                    <Style TargetType="{x:Type TreeViewItem}">
+                        <Style.Resources>
+                            <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="{DynamicResource {x:Static vsfx:VsColors.ToolWindowTextKey}}" />
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{DynamicResource {x:Static vsfx:VsColors.HighlightKey}}" />
+                            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="{DynamicResource {x:Static vsfx:VsColors.HighlightTextKey}}" />
+                        </Style.Resources>
+                    </Style>
+                </TreeView.Resources>
+            </TreeView>
         </ScrollViewer>
     </Grid>
 </UserControl>
-
-
 
